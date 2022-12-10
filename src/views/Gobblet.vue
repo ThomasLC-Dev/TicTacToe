@@ -184,7 +184,7 @@ export default{
     height: 22.5vw;
     display: flex;
     flex-direction: row;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .column{

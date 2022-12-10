@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import TicTacToe from '../views/TicTacToe';
 import Gobblet from "../views/Gobblet";
+import Rules from "../views/Rules";
 
 const routes = [
   {
@@ -12,6 +13,15 @@ const routes = [
     path: '/gobblet',
     name: 'gobblet',
     component: Gobblet
+  },
+  {
+    path: '/rules',
+    name: 'rules',
+    component: Rules
+  },
+  {
+    path: "/",
+    redirect: "/gobblet"
   }
 ]
 

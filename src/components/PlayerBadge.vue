@@ -1,5 +1,5 @@
 <template>
-    <div class="player-badge" :class="(currentPlayer == index) ? 'current-user' : ''">
+    <div class="player-badge" :class="(active) ? 'current-user' : ''">
         <span class="player-score">{{playerScore}}</span>
         <img src="https://as2.ftcdn.net/v2/jpg/03/35/34/35/1000_F_335343515_Frb5IFI9YnwHwYzP84ibjcMeCZFV1Cs6.jpg"/>
         <span class="player-name">{{playerName}}</span>

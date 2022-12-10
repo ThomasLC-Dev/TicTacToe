@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import TicTacToe from '../views/TicTacToe';
+import Gobblet from "../views/Gobblet";
 
 const routes = [
   {
     path: '/tic-tac-toe',
     name: 'tic-tac-toe',
     component: TicTacToe
+  },
+  {
+    path: '/gobblet',
+    name: 'gobblet',
+    component: Gobblet
   }
 ]
 

@@ -36,7 +36,7 @@ export default{
                 [{ r: 1, c: 3 }, { r: 2, c: 2 }, { r: 3, c: 1 }],
             ],
             showModal: false,
-            resultMessage: "Player 1 Win"
+            resultMessage: ""
         };
     },
     methods: {

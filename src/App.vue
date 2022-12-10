@@ -1,7 +1,8 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link to="/tic-tac-toe">TicTacToe</router-link>
-  </nav>
+    <router-link to="/gobblet">Gobblet</router-link>
+  </nav> -->
   <router-view/>
 </template>
 
@@ -16,6 +17,8 @@
     --primary-color: #2c3e50;
     --secondary-color: #e8cc13;
     --third-color: #1f7a54;
+    --gobblet-player-1: #d2315a;
+    --gobblet-player-2: #3f88e1;
 }
 
 body{
@@ -28,6 +31,7 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #FFF;
+  margin-top: 10px;
 }
 
 nav {
@@ -36,10 +40,11 @@ nav {
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: var(--third-color);
+  margin: 5px 10px;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: var(--secondary-color);
 }
 </style>

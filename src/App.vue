@@ -3,7 +3,7 @@
         <nav>
             <router-link to="/tic-tac-toe">TicTacToe</router-link>
             <router-link to="/gobblet">Gobblet</router-link>
-            <router-link to="/rules">Rules</router-link>
+            <router-link to="/rules">Règles</router-link>
         </nav>
         <router-view/>
     </div>

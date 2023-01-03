@@ -76,15 +76,6 @@ export default{
     margin: 10px 0;
 }
 
-/* .rules-view li::before{
-    display: block;
-    content: '';
-    width: 60%;
-    height: 1px;
-    background-color: #FFF;
-    margin: 10px auto;
-} */
-
 @media(max-width: 1200px){
     .rules-view{
         flex-direction: column;

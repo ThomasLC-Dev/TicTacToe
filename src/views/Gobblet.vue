@@ -55,6 +55,7 @@ export default{
             currentPlayer: 0,
             currentPlayerGobbletStack: -1,
             currentGridGobblet: {r: -1, c: -1},
+            // All wins configurations
             winGrids: [
                 [{ r: 1, c: 1 }, { r: 2, c: 1 }, { r: 3, c: 1 }, { r: 4, c: 1}],
                 [{ r: 1, c: 2 }, { r: 2, c: 2 }, { r: 3, c: 2 }, { r: 4, c: 2}],
@@ -72,11 +73,17 @@ export default{
         };
     },
     methods: {
+        /*
+        * Function call when a gobblet stack is selected
+        */
         selectPlayerGobbletStack(stackIndex){
             if(this.playersGobblets[this.currentPlayer][stackIndex].length == 0) return;
             if(this.currentGridGobblet != {r: -1, c: -1}) this.currentGridGobblet = {r: -1, c: -1};
             this.currentPlayerGobbletStack = stackIndex;
         },
+        /*
+        * Function call when a gobblet already in the grid is selected
+        */
         selectGridGobblet(rowIndex, columnIndex){
             if(rowIndex == this.currentGridGobblet.r && columnIndex == this.currentGridGobblet.c){
                 this.currentGridGobblet = {r: -1, c: -1};
@@ -87,34 +94,47 @@ export default{
             if(this.currentPlayerGobbletStack != -1) this.currentPlayerGobbletStack = -1;
             this.currentGridGobblet = {r: rowIndex, c: columnIndex};
         },
+        /*
+        * Function call when a case is clicked
+        */
         play(rowIndex, columnIndex) {
             if(this.currentPlayerGobbletStack == -1 && this.currentGridGobblet.r == -1 && this.currentGridGobblet.c == -1) return;
+            // Check if the destination case already have gobblet
             if(this.gridGame[rowIndex][columnIndex].length != 0){
+                // If the player want to add a neww gobblet from a stack
                 if(this.currentPlayerGobbletStack != -1){
+                    // Check if the size of the already placed gobblet is greater than the stack gobblet
                     if(this.gridGame[rowIndex][columnIndex][this.gridGame[rowIndex][columnIndex].length-1].gobblet.size >= this.playersGobblets[this.currentPlayer][this.currentPlayerGobbletStack][this.playersGobblets[this.currentPlayer][this.currentPlayerGobbletStack].length-1].size){
                         return;
                     }
                 }
+                // If the player want to move a gobblet already in the grid
                 else{
+                    // Check if the size of the already placed gobblet is greater than the selected player gobblet
                     if(this.gridGame[rowIndex][columnIndex][this.gridGame[rowIndex][columnIndex].length-1].gobblet.size >= this.gridGame[this.currentGridGobblet.r][this.currentGridGobblet.c][this.gridGame[this.currentGridGobblet.r][this.currentGridGobblet.c].length-1].gobblet.size){
                         return;
                     }
+                    // Check if the selected player gobblet case is the same of the cliked case
                     else if(rowIndex == this.currentGridGobblet.r && columnIndex == this.currentGridGobblet.c){
                         return;
                     }
                 }
             }
 
+            // Player want to add a new gobblet to the grid
             if(this.currentPlayerGobbletStack != -1){
                 this.gridGame[rowIndex][columnIndex].push({ playerId: this.currentPlayer, gobblet: this.playersGobblets[this.currentPlayer][this.currentPlayerGobbletStack][this.playersGobblets[this.currentPlayer][this.currentPlayerGobbletStack].length-1]});
                 this.playersGobblets[this.currentPlayer][this.currentPlayerGobbletStack].pop();
                 this.currentPlayerGobbletStack = -1;
             }
+            // Player want to move an already placed gobblet
             else{
                 this.gridGame[rowIndex][columnIndex].push({ playerId: this.currentPlayer, gobblet: this.gridGame[this.currentGridGobblet.r][this.currentGridGobblet.c][this.gridGame[this.currentGridGobblet.r][this.currentGridGobblet.c].length-1].gobblet});
                 this.gridGame[this.currentGridGobblet.r][this.currentGridGobblet.c].pop();
                 this.currentGridGobblet = {r: -1, c: -1};
             }
+
+
             if (this.checkGrid()) {
                 this.players[this.currentPlayer].score++;
                 this.endGame(this.currentPlayer);
@@ -123,14 +143,20 @@ export default{
                 this.currentPlayer = (this.currentPlayer == 0) ? 1 : 0;
             }
         },
+        /*
+        * Function to check if a player have win the game
+        * //TODO : Change the win check implementation to remove the duplicate code
+        */
         checkGrid() {
             let isWin = false;
             this.winGrids.forEach(winGrid => {
                 if (isWin)
                     return;
+                // Use to store the last check case value (if it's win or not)
                 let lastValueIsWin = true;
                 winGrid.forEach(gridCase => {
                     if (lastValueIsWin == true) {
+                        // Check if the current win configuration case is win and if the player who placed the last gobblet on the case is the current user 
                         if (this.gridGame[gridCase.r - 1][gridCase.c - 1].length != 0 && this.gridGame[gridCase.r - 1][gridCase.c - 1][this.gridGame[gridCase.r - 1][gridCase.c - 1].length-1].playerId == this.currentPlayer) {
                             lastValueIsWin = true;
                         }
@@ -141,9 +167,37 @@ export default{
                 });
                 isWin = lastValueIsWin;
             });
-            console.log(isWin);
+
+            if(!isWin){
+                this.currentPlayer = (this.currentPlayer == 0) ? 1 : 0;
+                this.winGrids.forEach(winGrid => {
+                    if (isWin)
+                        return;
+                    // Use to store the last check case value (if it's win or not)
+                    let lastValueIsWin = true;
+                    winGrid.forEach(gridCase => {
+                        if (lastValueIsWin == true) {
+                            // Check if the current win configuration case is win and if the player who placed the last gobblet on the case is the current user 
+                            if (this.gridGame[gridCase.r - 1][gridCase.c - 1].length != 0 && this.gridGame[gridCase.r - 1][gridCase.c - 1][this.gridGame[gridCase.r - 1][gridCase.c - 1].length - 1].playerId == this.currentPlayer) {
+                                lastValueIsWin = true;
+                            }
+                            else {
+                                lastValueIsWin = false;
+                            }
+                        }
+                    });
+                    isWin = lastValueIsWin;
+                });
+            }
+
+            if(!isWin){
+                this.currentPlayer = (this.currentPlayer == 0) ? 1 : 0;
+            }
             return isWin;
         },
+        /*
+        * Function call when the game is finished (Show the modal)
+        */
         endGame(winPlayer) {
             if (winPlayer != -1) {
                 this.resultMessage = this.players[this.currentPlayer].name + " a gagné !";
@@ -154,6 +208,9 @@ export default{
             }
             this.showModal = true;
         },
+        /*
+        * Function call when the modal is closed (Reset the data)
+        */
         closeModal(){
             this.showModal = false;
             this.gridGame = [[[], [], [], []],[[], [], [], []],[[], [], [], []],[[], [], [], []]];

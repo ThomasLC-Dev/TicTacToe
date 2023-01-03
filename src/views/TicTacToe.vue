@@ -2,8 +2,8 @@
     <div class="tic-tac-toe-view">
         <div class="row" v-for="(row, rowIndex) in gridGame" :key="rowIndex">
             <div class="column" :class="'column-'+rowIndex+'-'+columnIndex" v-for="(column, columnIndex) in row" :key="columnIndex" @click="play(rowIndex,columnIndex)">
-                <img v-if="(column=='0')" src="@/assets/croix.png" />
-                <img v-else-if="(column=='1')" src="@/assets/rond.png" />
+                <img v-if="(column=='0')" src="@/assets/croix.png" alt="Symbole du joueur 1 : croix" />
+                <img v-else-if="(column=='1')" src="@/assets/rond.png" alt="Symbole du joueur 2 : rond" />
             </div>
         </div>
         <div class="players">
@@ -25,6 +25,7 @@ export default{
             gridGame: [["", "", ""], ["", "", ""], ["", "", ""]],
             players: [new User("Player 1", 0), new User("Player 2", 0)],
             currentPlayer: 0,
+            // All wins configurations
             winGrids: [
                 [{ r: 1, c: 1 }, { r: 2, c: 1 }, { r: 3, c: 1 }],
                 [{ r: 1, c: 2 }, { r: 2, c: 2 }, { r: 3, c: 2 }],
@@ -40,7 +41,11 @@ export default{
         };
     },
     methods: {
+        /*
+        * Function call when a case is clicked
+        */
         play(rowIndex, columnIndex) {
+            // Cancel action if the clicked case already contains a symbol
             if(this.gridGame[rowIndex][columnIndex] != "") return;
             this.gridGame[rowIndex][columnIndex] = "" + this.currentPlayer;
             if (this.checkGrid("" + this.currentPlayer)) {
@@ -55,6 +60,9 @@ export default{
                 this.currentPlayer = (this.currentPlayer == 0) ? 1 : 0;
             }
         },
+        /*
+        * Function to check if a player have win the game
+        */
         checkGrid(symbolCheck) {
             let isWin = false;
             this.winGrids.forEach(winGrid => {
@@ -75,6 +83,9 @@ export default{
             });
             return isWin;
         },
+        /*
+        * Function to check if all cases are already filled without winner
+        */
         checkNullGame() {
             let filledCases = 0;
             this.gridGame.forEach(row => {
@@ -85,6 +96,9 @@ export default{
             });
             return filledCases == 9;
         },
+        /*
+        * Function call when the game is finished (Show the modal)
+        */
         endGame(winPlayer) {
             if (winPlayer != -1) {
                 this.resultMessage = this.players[this.currentPlayer].name + " a gagné !";
@@ -95,6 +109,9 @@ export default{
             }
             this.showModal = true;
         },
+        /*
+        * Function call when the modal is closed (Reset the data)
+        */
         closeModal(){
             this.showModal = false;
             this.gridGame = [["", "", ""], ["", "", ""], ["", "", ""]];

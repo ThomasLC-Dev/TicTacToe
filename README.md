@@ -1,24 +1,27 @@
-# tic-tac-toe
+# Jeu du Morpion et du Gobblet
+## Auteur
 
-## Project setup
-```
-npm install
-```
+- [@ThomasLC-Dev](https://github.com/ThomasLC-Dev) (LE CORVEC Thomas)
+## Présentation
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Ce projet contient le jeu du Morpion ainsi que celui du Gobblet.
+2 branches sont présentes :
+- main : Uniquement le jeu du Morpion
+- main-v2 : Jeu du Morpion, jeu du Gobblet et les règles
+Les différentes règles de ces 2 jeux sont accessibles directement
+depuis une page du site.
+## Installation
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Installer les dépendances du projet
 
-### Lints and fixes files
-```
-npm run lint
+```bash
+  npm install
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Démarrage
+
+Il est nécessaire d'avoir "vue-cli" sur sa machine.
+
+```bash
+  npm run serve
+```

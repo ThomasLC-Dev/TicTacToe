@@ -7,8 +7,8 @@
 Ce projet contient le jeu du Morpion ainsi que celui du Gobblet.
 2 branches sont présentes :
 - main : Uniquement le jeu du Morpion
-- main-v2 : Jeu du Morpion, jeu du Gobblet et les règles
-Les différentes règles de ces 2 jeux sont accessibles directement
+- main-v2 : Jeu du Morpion, jeu du Gobblet et les règles.
+Les règles de ces 2 jeux sont accessibles directement
 depuis une page du site.
 ## Installation
 

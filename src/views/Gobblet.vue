@@ -14,7 +14,9 @@
             <div v-for="(playerGobbletStack, index) in playersGobblets[currentPlayer]" :key="index" class="stack" :class="(this.currentPlayerGobbletStack==index) ? 'stack-selected' : ''" :style="'background-color: ' + ((currentPlayer == 0) ? 'var(--color-player-1)' : 'var(--color-player-2)') + ';'" @click="selectPlayerGobbletStack(index)"><span v-if="(playerGobbletStack.length!=0)">{{playerGobbletStack[playerGobbletStack.length-1].name}}</span></div>
         </div>
     </div>
-    <GameModal v-if="showModal" :title="resultMessage" @closeModal="closeModal()"></GameModal>
+    <Transition>
+        <GameModal v-if="showModal" :title="resultMessage" @closeModal="closeModal()"></GameModal>
+    </Transition>
 </template>
 
 <script>

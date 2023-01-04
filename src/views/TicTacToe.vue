@@ -12,7 +12,9 @@
             <PlayerBadge v-for="(player, index) in players" :key="index" :playerName="players[index].name" :playerScore="players[index].score" :active="(currentPlayer == index)" ></PlayerBadge>
         </div>
     </div>
-    <GameModal v-if="showModal" :title="resultMessage" @closeModal="closeModal()"></GameModal>
+    <Transition>
+        <GameModal v-if="showModal" :title="resultMessage" @closeModal="closeModal()"></GameModal>
+    </Transition>
 </template>
 
 <script>
@@ -155,15 +157,15 @@ export default{
     color: var(--color-player-2);
 }
 
-.v-enter-active {
-  transition: all 0.5s ease;
+.v-enter-active,.v-leave-active {
+    transition: all 0.5s ease;
 }
 
-.v-enter-from{
+.v-enter-from,.v-leave-to {
     opacity: 0;
 }
 
-.v-enter-to{
+.v-enter-to,.v-leave-from {
     opacity: 1;
 }
 

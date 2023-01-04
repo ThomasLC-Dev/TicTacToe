@@ -2,7 +2,9 @@
     <div class="gobblet-view">
         <div class="row" v-for="(row, rowIndex) in gridGame" :key="rowIndex">
             <div class="column" :class="'column-'+rowIndex+'-'+columnIndex" v-for="(column, columnIndex) in row" :key="columnIndex" @click="play(rowIndex,columnIndex)">
-                <div v-if="(column[column.length-1]!=null)" class="gobblet" :class="((column[column.length-1].playerId==0) ? 'gobblet-player-1' : 'gobblet-player-2') + ((currentGridGobblet.r == rowIndex && currentGridGobblet.c == columnIndex) ? ' gobblet-selected' : '')" :style="'width: ' + column[column.length-1].gobblet.size*22.5 + '%; height:' + column[column.length-1].gobblet.size*22.5 + '%'" @click="selectGridGobblet(rowIndex, columnIndex)">{{column[column.length-1].gobblet.name}}</div>
+                <Transition>
+                    <div v-if="(column[column.length-1]!=null)" class="gobblet" :class="((column[column.length-1].playerId==0) ? 'gobblet-player-1' : 'gobblet-player-2') + ((currentGridGobblet.r == rowIndex && currentGridGobblet.c == columnIndex) ? ' gobblet-selected' : '')" :style="'width: ' + column[column.length-1].gobblet.size*22.5 + '%; height:' + column[column.length-1].gobblet.size*22.5 + '%'" @click="selectGridGobblet(rowIndex, columnIndex)">{{column[column.length-1].gobblet.name}}</div>
+                </Transition>
             </div>
         </div>
         <div class="players">
@@ -270,6 +272,18 @@ export default{
     background-color: var(--color-player-2);
 }
 
+.v-enter-active, .v-leave-active {
+    transition: all 0.5s ease;
+}
+
+.v-enter-from, .v-leave-to {
+    opacity: 0;
+}
+
+.v-enter-to, .v-leave-from {
+    opacity: 1;
+}
+
 .column-0-0, .column-1-0, .column-2-0, .column-3-0{
     border-left: none;
 }
@@ -316,5 +330,4 @@ export default{
 .stack-selected, .gobblet-selected{
     border: 2px solid #FFF;
 }
-
 </style>

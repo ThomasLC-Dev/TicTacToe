@@ -27,7 +27,7 @@ export default{
     transition: all 0.2s ease-in;
 }
 
-.player-badge.player-badge.current-user {
+.player-badge.current-user {
     transform: scale(1.1);
 }
 

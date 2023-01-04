@@ -2,8 +2,10 @@
     <div class="tic-tac-toe-view">
         <div class="row" v-for="(row, rowIndex) in gridGame" :key="rowIndex">
             <div class="column" :class="'column-'+rowIndex+'-'+columnIndex" v-for="(column, columnIndex) in row" :key="columnIndex" @click="play(rowIndex,columnIndex)">
-                <div v-if="(column=='0')" class="X">X</div>
-                <div v-else-if="(column=='1')" class="O">O</div>
+                <Transition>
+                    <div v-if="(column=='0')" class="X">X</div>
+                    <div v-else-if="(column=='1')" class="O">O</div>
+                </Transition>
             </div>
         </div>
         <div class="players">
@@ -153,6 +155,18 @@ export default{
     color: var(--color-player-2);
 }
 
+.v-enter-active {
+  transition: all 0.5s ease;
+}
+
+.v-enter-from{
+    opacity: 0;
+}
+
+.v-enter-to{
+    opacity: 1;
+}
+
 .column-0-0, .column-1-0, .column-2-0{
     border-left: none;
 }
@@ -177,5 +191,4 @@ export default{
     justify-content: space-around;
     margin: 40px auto 0;
 }
-
 </style>

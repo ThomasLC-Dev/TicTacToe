@@ -6,8 +6,48 @@
             <router-link to="/gobblet">Gobblet</router-link>
         </nav>
         <router-view/>
+        <GameModal v-if="noPlayersName" title="Nom des joueurs" @closeModal="updatePlayersName">
+            <form>
+                <input placeholder="Nom du joueur 1" v-model="playerName1" />
+                <input placeholder="Nom du joueur 2" v-model="playerName2"/>
+            </form>
+        </GameModal>
     </div>
 </template>
+
+<script>
+import GameModal from './components/GameModal.vue';
+
+export default{
+    name: 'App',
+    data(){
+        return{
+            noPlayersName: false,
+            playerName1: "",
+            playerName2: ""
+        }
+    },
+    created() {
+        this.$store.state.players.forEach(player => {
+            if (player.name == "") {
+                this.noPlayersName = true;
+            }
+        })
+    },
+    methods:{
+        updatePlayersName(){
+            if(this.playerName1 != "" && this.playerName2 != ""){
+                this.$store.commit('changePlayerName', {index: 0, name: this.playerName1});
+                this.$store.commit('changePlayerName', {index: 1, name: this.playerName2});
+                this.noPlayersName = false;
+            }
+        }
+    },
+    components: {
+        GameModal
+    }
+}
+</script>
 
 <style>
 *{

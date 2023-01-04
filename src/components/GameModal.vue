@@ -2,6 +2,7 @@
     <div class="backdrop-modal">
         <div class="modal">
             <h2>{{title}}</h2>
+            <slot />
             <button @click="close()">Continuer</button>
         </div>
     </div>
@@ -57,5 +58,17 @@ export default{
     border-radius: 10px;
     margin-top: 20px;
     cursor: pointer;
+}
+
+.modal form{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal input{
+    width: 80%;
+    margin: 7px auto;
+    padding: 5px;
+    font-size: 1em;
 }
 </style>

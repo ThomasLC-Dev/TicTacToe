@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import User from '../models/user.js';
 import Gobblet from '../models/gobblet.js';
 import GameModal from '@/components/GameModal.vue';
 import PlayerBadge from '@/components/PlayerBadge.vue';
@@ -39,7 +38,7 @@ export default{
                     [], [], [], []
                 ]
             ],
-            players: [new User("Player 1", 0), new User("Player 2", 0)],
+            players: this.$store.state.players,
             playersGobblets: [
                 [
                     [new Gobblet(1, "S"), new Gobblet(2, "M"), new Gobblet(3, "L"), new Gobblet(4, "XL")],

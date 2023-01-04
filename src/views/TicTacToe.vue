@@ -2,8 +2,8 @@
     <div class="tic-tac-toe-view">
         <div class="row" v-for="(row, rowIndex) in gridGame" :key="rowIndex">
             <div class="column" :class="'column-'+rowIndex+'-'+columnIndex" v-for="(column, columnIndex) in row" :key="columnIndex" @click="play(rowIndex,columnIndex)">
-                <img v-if="(column=='0')" src="@/assets/croix.png" alt="Symbole du joueur 1 : croix" />
-                <img v-else-if="(column=='1')" src="@/assets/rond.png" alt="Symbole du joueur 2 : rond" />
+                <div v-if="(column=='0')" class="X">X</div>
+                <div v-else-if="(column=='1')" class="O">O</div>
             </div>
         </div>
         <div class="players">
@@ -142,8 +142,16 @@ export default{
     align-items: center;
 }
 
-.column img{
-    width: 90%;
+.column *{
+    font-size: 6em;
+}
+
+.column .X{
+    color: var(--color-player-1);
+}
+
+.column .O{
+    color: var(--color-player-2);
 }
 
 .column-0-0, .column-1-0, .column-2-0{

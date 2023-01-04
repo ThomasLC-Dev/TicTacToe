@@ -9,7 +9,7 @@
             <PlayerBadge v-for="(player, index) in players" :key="index" :playerName="player.name" :playerScore="player.score" :active="(currentPlayer == index) ? true : false" ></PlayerBadge>
         </div>
         <div class="select-goblet">
-            <div v-for="(playerGobbletStack, index) in playersGobblets[currentPlayer]" :key="index" class="stack" :class="(this.currentPlayerGobbletStack==index) ? 'stack-selected' : ''" :style="'background-color: ' + ((currentPlayer == 0) ? 'var(--gobblet-player-1)' : 'var(--gobblet-player-2)') + ';'" @click="selectPlayerGobbletStack(index)"><span v-if="(playerGobbletStack.length!=0)">{{playerGobbletStack[playerGobbletStack.length-1].name}}</span></div>
+            <div v-for="(playerGobbletStack, index) in playersGobblets[currentPlayer]" :key="index" class="stack" :class="(this.currentPlayerGobbletStack==index) ? 'stack-selected' : ''" :style="'background-color: ' + ((currentPlayer == 0) ? 'var(--color-player-1)' : 'var(--color-player-2)') + ';'" @click="selectPlayerGobbletStack(index)"><span v-if="(playerGobbletStack.length!=0)">{{playerGobbletStack[playerGobbletStack.length-1].name}}</span></div>
         </div>
     </div>
     <GameModal v-if="showModal" :title="resultMessage" @closeModal="closeModal()"></GameModal>
@@ -264,11 +264,11 @@ export default{
 }
 
 .column .gobblet-player-1{
-    background-color: var(--gobblet-player-1);
+    background-color: var(--color-player-1);
 }
 
 .column .gobblet-player-2{
-    background-color: var(--gobblet-player-2);
+    background-color: var(--color-player-2);
 }
 
 .column-0-0, .column-1-0, .column-2-0, .column-3-0{

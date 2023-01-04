@@ -1,9 +1,9 @@
 <template>
     <div class="page">
         <nav>
+            <router-link to="/rules">Règles</router-link>
             <router-link to="/tic-tac-toe">TicTacToe</router-link>
             <router-link to="/gobblet">Gobblet</router-link>
-            <router-link to="/rules">Règles</router-link>
         </nav>
         <router-view/>
     </div>
@@ -20,8 +20,8 @@
     --primary-color: #2c3e50;
     --secondary-color: #e8cc13;
     --third-color: #1f7a54;
-    --gobblet-player-1: #d2315a;
-    --gobblet-player-2: #3f88e1;
+    --color-player-1: #d2315a;
+    --color-player-2: #3f88e1;
 }
 
 body{

@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="players">
-            <PlayerBadge v-for="(player, index) in players" :key="index" :playerName="players[index].name" :playerScore="players[index].score" :active="(currentPlayer == index)" ></PlayerBadge>
+            <PlayerBadge v-for="(player, index) in players" :key="index" :playerName="player.name" :playerScore="player.score" :active="(currentPlayer == index)" ></PlayerBadge>
         </div>
     </div>
     <Transition>
